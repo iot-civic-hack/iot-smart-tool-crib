@@ -47,7 +47,7 @@ function buzzerInit() {
 }
 
 function led1Init(id, color) {
-  setLED(id, color, 'on');
+  setLED(id, color, 'off');
 }
 
 function led2Init(id, color) {
