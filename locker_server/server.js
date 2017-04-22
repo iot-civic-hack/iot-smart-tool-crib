@@ -103,7 +103,7 @@ function defaultState() {
   lockers[2].lockStatus = 'locked';
   lockers[1].doorStatus = getDoor(1);
   lockers[2].doorStatus = getDoor(2);
-  console.log("Default State Done: "+lockers);
+  console.log("Default State Done: "+lockers.json);
 }
 
 app.get('/', function (req, res) {
