@@ -38,6 +38,9 @@ gpio.setup(gpioPins.led[2]['B'], gpio.DIR_OUT, led2Init.bind(this, 2, 'B'));
 gpio.setup(gpioPins.sense[1], gpio.DIR_IN, senseInit.bind(this, 1));
 gpio.setup(gpioPins.sense[2], gpio.DIR_IN, senseInit.bind(this, 2));
 
+//Default States
+setTimeout(function() { defaultState(); }, 1000);
+
 function lockInit(id) {
   setLock(id, 'lock');
 }
@@ -88,6 +91,15 @@ function getDoor(id) {
     console.log('The door is ' + door[value]);
     return door[value];
   });
+}
+
+function defaultState() {
+  var ledGreen = {1: 'off', 2: 'off'};
+  var ledRed = {1: 'on', 2: 'on'};
+  setLock(1, 'lock');
+  setLock(2, 'lock');
+  setLED(lockerID, 'G', ledGreen[lockerID]);
+  setLED(lockerID, 'R', ledRed[lockerID]);
 }
 
 app.get('/', function (req, res) {
