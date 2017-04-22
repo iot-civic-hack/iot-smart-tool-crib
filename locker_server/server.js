@@ -94,11 +94,10 @@ function getDoor(id) {
 }
 
 function defaultState() {
-  var ledGreen = {1: 'on', 2: 'on'};
-  var ledRed = {1: 'off', 2: 'off'};
+  var ledRed = {1: 'on', 2: 'on'};
   setLock(1, 'lock');
   setLock(2, 'lock');
-  setLED(1, 'G', ledGreen[1]);
+  setLED(1, 'R', ledRed[1]);
   setLED(2, 'R', ledRed[2]);
   console.log("Default State Done");
 }
