@@ -30,7 +30,7 @@ export default class SmartLockerView extends Component {
     title: 'SmartLocker',
     headerBackTitle: null,
     tabBarIcon: ({ focused }) => {
-      return <BottomTab icon={"lock"} label="Smart Locker" focused={focused} />
+      return <BottomTab icon={"lock"} label="Smart Tool Crib" focused={focused} />
     },
   });
 
@@ -110,8 +110,6 @@ export default class SmartLockerView extends Component {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Image source={containerImage} style={{flex: 1, resizeMode: 'cover', alignItems: 'center', justifyContent: 'center'}}>
-          
-
 
           <View style={{
             backgroundColor: '#ffffff', 
@@ -139,7 +137,7 @@ export default class SmartLockerView extends Component {
               fontFamily: 'Avenir-Heavy',
               color: '#0066cc'
             }}>
-            Smart Locker
+            Smart Tool Crib
             </Text>
 
             <Text style={{
