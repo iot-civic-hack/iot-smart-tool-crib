@@ -106,8 +106,8 @@ app.get('/unlock', function (req, res) {
 });
 
 app.get('/lock', function (req, res) {
-  var ledGreen = {1: 'off', 2: 'on'};
-  var ledRed = {1: 'on', 2: 'off'};
+  var ledGreen = {1: 'on', 2: 'off'};
+  var ledRed = {1: 'off', 2: 'on'};
   var lockerID = req.param('id');
   console.warn("Locker id: locked", lockerID);
   setLock(lockerID, 'lock');
