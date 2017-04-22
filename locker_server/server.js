@@ -63,6 +63,7 @@ function setLock(id, value) {
 
 function setLED(id, color, value) {
   var led = {'on': false, 'off': true};
+  console.log(gpioPins.lock[id][color]);
   gpio.write(gpioPins.lock[id][color], led[value], function(err) {
       if (err) throw err;
       console.log('Written to Lock');
