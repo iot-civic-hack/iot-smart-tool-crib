@@ -79,7 +79,7 @@ function setLED(id, color, value) {
 }
 
 function getDoor(id) {
-  var door = {true: 'closed', false: 'open'};
+  var door = {true: 'open', false: 'closed'};
   gpio.read(gpioPins.sense[id], function(err, value) {
     console.log('The door is ' + door[value]);
     return door[value];
