@@ -23,7 +23,7 @@ let gpioPins = {
   }
 }
 
-gpio.destroy();
+//GPIO Outputs
 gpio.setup(gpioPins.lock[1], gpio.DIR_OUT, lockInit.bind(this, 1));
 gpio.setup(gpioPins.lock[2], gpio.DIR_OUT, lockInit.bind(this, 2));
 gpio.setup(gpioPins.buzzer, gpio.DIR_OUT, buzzerInit);
@@ -33,6 +33,10 @@ gpio.setup(gpioPins.led[1]['B'], gpio.DIR_OUT, ledInit.bind(this, 1, 'B'));
 gpio.setup(gpioPins.led[2]['R'], gpio.DIR_OUT, ledInit.bind(this, 2, 'R'));
 gpio.setup(gpioPins.led[2]['G'], gpio.DIR_OUT, ledInit.bind(this, 2, 'G'));
 gpio.setup(gpioPins.led[2]['B'], gpio.DIR_OUT, ledInit.bind(this, 2, 'B'));
+
+//GPIO Inputs
+gpio.setup(gpioPins.sense[1], gpio.DIR_IN, senseInit.bind(this, 1));
+gpio.setup(gpioPins.sense[2], gpio.DIR_IN);
 
 function lockInit(id) {
   setLock(id, 'lock');
@@ -44,6 +48,10 @@ function buzzerInit() {
 
 function ledInit(id, color) {
   setLED(id, color, 'off');
+}
+
+function senseInit(id) {
+  lockers[id].doorStatus = getDoor(id);
 }
 
 function setBuzzer(value) {
@@ -64,10 +72,17 @@ function setLock(id, value) {
 
 function setLED(id, color, value) {
   var led = {'on': false, 'off': true};
-  console.log(gpioPins.led[id][color], color);
   gpio.write(gpioPins.led[id][color], led[value], function(err) {
       if (err) throw err;
       console.log('Written to Lock');
+  });
+}
+
+function getDoor(id) {
+  var door = {true: 'closed', false: 'open'};
+  gpio.read(gpioPins.sense[id], function(err, value) {
+    console.log('The value is ' + value);
+    return door[value];
   });
 }
 
