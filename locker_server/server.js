@@ -58,7 +58,7 @@ function led2Init(id, color) {
 }
 
 function senseInit(id) {
-  lockers[id].doorStatus = getDoor(id);
+  lockers[id].doorStatus = getDoor(id, function(){});
 }
 
 function setBuzzer(value) {
