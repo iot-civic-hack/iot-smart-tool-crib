@@ -1,19 +1,43 @@
 var express = require('express');
+var gpio = require('rpi-gpio');
 var app = express();
-// var gpio = require('rpi-gpio');
-var output = 0;
 
-// import { unlock, lock, getStatus } from './smart-locker';
+let lockers = {
+  1: {status: 'closed'},
+  2: {status: 'closed'}
+}
 
-var SmartLocker = require('./smart-locker.js');
+let gpioPins = {
+  'lock' : {
+    1: 7,
+    2: 29
+  },
+  'sense' : {
+    1: 16,
+    2: 18
+  },
+  'buzzer' : 38,
+  'led' : {
+    1: {'R': 31, 'G': 13, 'B': 19},
+    2: {'R': 17, 'G': 22, 'B': 27}
+  }
+}
 
-// gpio.setup(38, gpio.DIR_OUT, write);
+gpio.setup(gpioPins.lock[1], gpio.DIR_OUT);
+gpio.setup(gpioPins.lock[2], gpio.DIR_OUT);
+gpio.setup(gpioPins.buzzer, gpio.DIR_OUT);
+gpio.setup(gpioPins.led[1].R, gpio.DIR_OUT);
+gpio.setup(gpioPins.led[1].G, gpio.DIR_OUT);
+gpio.setup(gpioPins.led[1].B, gpio.DIR_OUT);
+gpio.setup(gpioPins.led[2].R, gpio.DIR_OUT);
+gpio.setup(gpioPins.led[2].G, gpio.DIR_OUT);
+gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT);
 // gpio.setup(16, gpio.DIR_IN, gpio.EDGE_BOTH);
 // gpio.setup(31, gpio.DIR_OUT);
 // gpio.setup(33, gpio.DIR_OUT);
 // gpio.setup(35, gpio.DIR_OUT);
 
-setTimeout(SmartLocker.checkLockerOpen(1), 1000);
+// setTimeout(SmartLocker.checkLockerOpen(1), 1000);
 
 app.get('/', function (req, res) {
   res.send('OK');
