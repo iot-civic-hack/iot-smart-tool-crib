@@ -26,12 +26,12 @@ let gpioPins = {
 gpio.setup(gpioPins.lock[1], gpio.DIR_OUT, lock1Init);
 gpio.setup(gpioPins.lock[2], gpio.DIR_OUT, lock2Init);
 gpio.setup(gpioPins.buzzer, gpio.DIR_OUT, buzzerInit);
-gpio.setup(gpioPins.led[1].R, gpio.DIR_OUT);
-gpio.setup(gpioPins.led[1].G, gpio.DIR_OUT);
-gpio.setup(gpioPins.led[1].B, gpio.DIR_OUT);
-gpio.setup(gpioPins.led[2].R, gpio.DIR_OUT);
-gpio.setup(gpioPins.led[2].G, gpio.DIR_OUT);
-gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT);
+gpio.setup(gpioPins.led[1].R, gpio.DIR_OUT, led1RedInit);
+gpio.setup(gpioPins.led[1].G, gpio.DIR_OUT, led1GreenInit);
+gpio.setup(gpioPins.led[1].B, gpio.DIR_OUT, led1BlueInit);
+gpio.setup(gpioPins.led[2].R, gpio.DIR_OUT, led2RedInit);
+gpio.setup(gpioPins.led[2].G, gpio.DIR_OUT, led2GreenInit);
+gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT, led2BlueInit);
 
 function lock1Init() {
   setLock(1, 'lock');
@@ -43,6 +43,30 @@ function lock2Init() {
 
 function buzzerInit() {
   setBuzzer('off');
+}
+
+function led1RedInit() {
+  setLED(1, 'off');
+}
+
+function led1GreenInit() {
+  setLED(1, 'off');
+}
+
+function led1BlueInit() {
+  setLED(1, 'off');
+}
+
+function led2RedInit() {
+  setLED(2, 'off');
+}
+
+function led2GreenInit() {
+  setLED(2, 'off');
+}
+
+function led2BlueInit() {
+  setLED(2, 'off');
 }
 
 function setBuzzer(value) {
@@ -61,26 +85,30 @@ function setLock(id, value) {
   });
 }
 
+function setLED(id, value) {
+  var led = {'on': false, 'off': true};
+  gpio.write(gpioPins.lock[id], led[value], function(err) {
+      if (err) throw err;
+      console.log('Written to Lock');
+  });
+}
+
 app.get('/', function (req, res) {
   res.send('OK');
 });
 
 app.get('/unlock', function (req, res) {
-
   var lockerID = req.param('id');
-  setBuzzer('on');
+  console.warn("Locker id: unlocked", lockerID);
+  setLock(lockerID, 'unlock');
+  res.send(lockerID);
+});
 
-
-  console.warn("locker id: ", lockerID);
-
-  //
-  // UNLOCK CODE HERE
-  //
-
-
-
-
-  res.send(output);
+app.get('/lock', function (req, res) {
+  var lockerID = req.param('id');
+  console.warn("Locker id: unlocked", lockerID);
+  setLock(lockerID, 'lock');
+  res.send(lockerID);
 });
 
 // gpio.on('change', function(channel, value) {
