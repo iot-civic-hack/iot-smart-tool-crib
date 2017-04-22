@@ -1,6 +1,9 @@
 var express = require('express');
 var gpio = require('rpi-gpio');
+var SmartLockerM2X = require('./smart-locker-m2x.js');
 var app = express();
+
+var accessPerDay = 0;
 
 let lockers = {
   1: {doorStatus: 'closed', lockStatus: 'locked'},
@@ -148,6 +151,8 @@ app.get('/unlock', function (req, res) {
   setLED(id, 'G', ledGreen[id]);
   setLED(id, 'R', ledRed[id]);
   setTimeout(lockIfOpen.bind(this, id), 5000);
+  accessPerDay += 1;
+  SmartLockerM2X.updateDoorCount(accessPerDay);
   res.send(id);
 });
 
