@@ -98,8 +98,8 @@ function defaultState() {
   var ledRed = {1: 'on', 2: 'on'};
   setLock(1, 'lock');
   setLock(2, 'lock');
-  setLED(1, 'G', ledGreen[lockerID]);
-  setLED(2, 'R', ledRed[lockerID]);
+  setLED(1, 'G', ledGreen[1]);
+  setLED(2, 'R', ledRed[2]);
 }
 
 app.get('/', function (req, res) {
