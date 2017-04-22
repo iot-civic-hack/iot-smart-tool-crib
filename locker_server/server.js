@@ -63,8 +63,8 @@ function setLock(id, value) {
 
 function setLED(id, color, value) {
   var led = {'on': false, 'off': true};
-  console.log(gpioPins.lock[id][color]);
-  gpio.write(gpioPins.lock[id][color], led[value], function(err) {
+  console.log(gpioPins.led[id][color]);
+  gpio.write(gpioPins.led[id][color], led[value], function(err) {
       if (err) throw err;
       console.log('Written to Lock');
   });
@@ -88,21 +88,6 @@ app.get('/lock', function (req, res) {
   res.send(lockerID);
 });
 
-// gpio.on('change', function(channel, value) {
-//     console.log('Channel ' + channel + ' value is now ' + value);
-//     //gpio.write(38, value);
-//     gpio.write(31, true);
-//     gpio.write(33, value);
-//     gpio.write(35, value);
-// });
-//
-// function write() {
-//     gpio.write(38, true, function(err) {
-//         if (err) throw err;
-//         console.log('Written to pin');
-//     });
-// }
-//gpio.destroy();
 app.listen(3000, function () {
   console.log('Example app listening on port 3000');
 });
