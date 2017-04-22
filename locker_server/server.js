@@ -39,7 +39,7 @@ gpio.setup(gpioPins.sense[1], gpio.DIR_IN, senseInit.bind(this, 1));
 gpio.setup(gpioPins.sense[2], gpio.DIR_IN, senseInit.bind(this, 2));
 
 //Default States
-setTimeout(function() { defaultState(); }, 1000);
+setTimeout(defaultState, 1000);
 
 function lockInit(id) {
   setLock(id, 'lock');
@@ -100,6 +100,7 @@ function defaultState() {
   setLock(2, 'lock');
   setLED(1, 'G', ledGreen[1]);
   setLED(2, 'R', ledRed[2]);
+  console.log("Default State Done");
 }
 
 app.get('/', function (req, res) {
