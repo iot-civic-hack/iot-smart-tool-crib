@@ -3,8 +3,8 @@ var gpio = require('rpi-gpio');
 var app = express();
 
 let lockers = {
-  1: {status: 'closed'},
-  2: {status: 'closed'}
+  1: {doorStatus: 'closed', lockStatus: 'locked'},
+  2: {doorStatus: 'closed', lockStatus: 'locked'}
 }
 
 let gpioPins = {
@@ -69,7 +69,7 @@ app.get('/unlock', function (req, res) {
 
   var lockerID = req.param('id');
   output = !output;
-  // gpio.write(7, output);
+  setBuzzer('on');
 
 
   console.warn("locker id: ", lockerID);
