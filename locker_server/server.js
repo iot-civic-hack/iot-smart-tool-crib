@@ -23,8 +23,12 @@ let gpioPins = {
   }
 }
 
+//setup gpio pins
+gpio.setup(gpioPins.lock[1], gpio.DIR_IN);
+gpio.setup(gpioPins.lock[2], gpio.DIR_IN);
+
 function checkLockerOpen(id) {
-  gpio.read(gpioPins.sense[id], function(err, value) {
+  gpio.read(gpioPins.lock[id], function(err, value) {
     console.log("Locker "+id+" is "+value);
     return value;
   });
