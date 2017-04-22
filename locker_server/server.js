@@ -97,10 +97,14 @@ function lockIfOpen(id) {
   setBuzzer('off');
   getDoor(id, function(err, value) {
     if (value == 'open') {
+      setBuzzer('on');
       setLock(id, 'locked');
+      var ledGreen = {1: 'off', 2: 'on'};
+      var ledRed = {1: 'on', 2: 'off'};
+      setLED(id, 'G', ledGreen[id]);
+      setLED(id, 'R', ledRed[id]);
     }
     else {
-      setBuzzer('on');
       setTimeout(lockIfOpen.bind(this, id), 100);
     }
   });
