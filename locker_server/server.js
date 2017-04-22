@@ -23,8 +23,8 @@ let gpioPins = {
   }
 }
 
-gpio.setup(gpioPins.lock[1], gpio.DIR_OUT);
-gpio.setup(gpioPins.lock[2], gpio.DIR_OUT);
+gpio.setup(gpioPins.lock[1], gpio.DIR_OUT, lock1Init);
+gpio.setup(gpioPins.lock[2], gpio.DIR_OUT, lock2Init);
 gpio.setup(gpioPins.buzzer, gpio.DIR_OUT, buzzerInit);
 gpio.setup(gpioPins.led[1].R, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[1].G, gpio.DIR_OUT);
@@ -33,20 +33,31 @@ gpio.setup(gpioPins.led[2].R, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[2].G, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT);
 
-function buzzerInit {
-  setBuzzer('off');
+function lock1Init {
+  setLock('lock');
 }
 
-function main() {
-    setBuzzer('on');
-    setTimeout(function() { setBuzzer('off'); }, 1000);
+function lock2Init {
+  setLock('lock');
+}
+
+function buzzerInit {
+  setBuzzer('off');
 }
 
 function setBuzzer(value) {
   var buzzer = {'on': false, 'off': true};
   gpio.write(gpioPins.buzzer, buzzer[value], function(err) {
       if (err) throw err;
-      console.log('Written to pin');
+      console.log('Written to Buzzer');
+  });
+}
+
+function setLock(id, value) {
+  var lock = {'unlock': false, 'lock': true};
+  gpio.write(gpioPins.lock[id], lock[value], function(err) {
+      if (err) throw err;
+      console.log('Written to Lock');
   });
 }
 
