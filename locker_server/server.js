@@ -63,7 +63,7 @@ function setBuzzer(value) {
 }
 
 function setLock(id, value) {
-  var lock = {'unlock': false, 'lock': true};
+  var lock = {'lock': false, 'unlock': true};
   gpio.write(gpioPins.lock[id], lock[value], function(err) {
       if (err) throw err;
       console.log('Written to Lock');
@@ -99,7 +99,7 @@ app.get('/unlock', function (req, res) {
 
 app.get('/lock', function (req, res) {
   var lockerID = req.param('id');
-  console.warn("Locker id: unlocked", lockerID);
+  console.warn("Locker id: locked", lockerID);
   setLock(lockerID, 'lock');
   res.send(lockerID);
 });
