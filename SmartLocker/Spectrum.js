@@ -58,9 +58,6 @@ export default class Spectrum extends Component {
             </Text>
 
           <View style={{
-            borderWidth: 1,
-            borderRadius: 4,
-            borderColor: '#cccccc',
             marginTop: 10,
             marginBottom: 20,
             paddingLeft: 20,
@@ -70,7 +67,7 @@ export default class Spectrum extends Component {
             <Text style={{
               fontFamily: 'Avenir-Book',
               fontSize: 20,
-              color: '#888',
+              color: '#dd0000',
               marginTop: 20,
               marginBottom: 20
             }}>

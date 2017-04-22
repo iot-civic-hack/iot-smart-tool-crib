@@ -21,7 +21,7 @@ export default class CheckingOut extends Component {
     title: 'ADS1102CA',
     headerBackTitle: null,
     tabBarIcon: ({ focused }) => {
-      return <BottomTab icon={"wrench"} label="Equipment" focused={focused} />
+      return <BottomTab icon={"list-ul"} label="Checked Out" focused={focused} />
     },
   });
 
@@ -133,9 +133,6 @@ export default class CheckingOut extends Component {
             </Text>
 
           <View style={{
-            borderWidth: 1,
-            borderRadius: 4,
-            borderColor: '#cccccc',
             marginTop: 10,
             marginBottom: 20,
             paddingLeft: 30,

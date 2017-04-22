@@ -44,9 +44,6 @@ export default class ThankYou extends Component {
           </TouchableWithoutFeedback>
 
           <View style={{
-            borderWidth: 1,
-            borderRadius: 4,
-            borderColor: '#cccccc',
             marginTop: 10,
             marginBottom: 20,
             paddingLeft: 30,
