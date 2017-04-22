@@ -68,7 +68,6 @@ app.get('/', function (req, res) {
 app.get('/unlock', function (req, res) {
 
   var lockerID = req.param('id');
-  output = !output;
   setBuzzer('on');
 
 
