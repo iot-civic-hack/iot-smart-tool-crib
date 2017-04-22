@@ -15,19 +15,24 @@ import SmartLockerView from './SmartLocker';
 import EquipmentList from './EquipmentList';
 import CheckOuts from './CheckOuts';
 
+import Oscope from './Oscope';
+import Spectrum from './Spectrum';
+import CheckingOut from './CheckingOut';
 
 console.disableYellowBox = true;
 
 
-
 const EquipmentStack = StackNavigator({
-  EquipmentList: { screen: EquipmentList }
+  EquipmentList: { screen: EquipmentList },
+  Oscope: {screen: Oscope},
+  Spectrum: {screen: Spectrum},
 }, {
     headerMode: 'screen'
 });
 
 const CheckOutsStack = StackNavigator({
-  CheckOuts: { screen: CheckOuts }
+  CheckOuts: { screen: CheckOuts },
+  CheckingOut: { screen: CheckingOut }
 }, {
     headerMode: 'screen'
 });

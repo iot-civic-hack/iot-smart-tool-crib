@@ -25,7 +25,7 @@ import dm3068 from './tools/dm3068.png';
 
 const ImageTile = ({tool}) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={tool.onPress}>
       <View style={{
         padding: 10, 
         margin: 15,
@@ -79,13 +79,21 @@ export default class EquipmentList extends Component {
     headerBackTitle: null
   });
 
+  loadOscope = () => {
+    this.props.navigation.navigate('Oscope');
+  }
+
+  loadSpectrum = () => {
+    this.props.navigation.navigate('Spectrum');
+  }
+
   render() {
     return (
       <ScrollView style={{paddingTop: 20, paddingBottom: 20}}>
         <View style={{marginBottom: 100}}>
 
-        <Row tool1={{image: oscope, label: 'ADS1102CA'}} 
-              tool2={{image: spectrumAnalyzer, label: 'Spectrum Analyzer'}} />
+        <Row tool1={{image: oscope, label: 'ADS1102CA', onPress: this.loadOscope}} 
+              tool2={{image: spectrumAnalyzer, label: 'Spectrum Analyzer', onPress: this.loadSpectrum}} />
 
         <Row tool1={{image: DS1102D, label: 'DS1102D'}} 
               tool2={{image: UT300B, label: 'UT300B'}} />
