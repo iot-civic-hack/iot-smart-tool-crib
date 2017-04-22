@@ -26,6 +26,7 @@ let gpioPins = {
 gpio.setup(gpioPins.lock[1], gpio.DIR_OUT, lockInit.bind(this, 1));
 gpio.setup(gpioPins.lock[2], gpio.DIR_OUT, lockInit.bind(this, 2));
 gpio.setup(gpioPins.buzzer, gpio.DIR_OUT, buzzerInit);
+console.log(gpioPins.led[1]['R']);
 gpio.setup(gpioPins.led[1]['R'], gpio.DIR_OUT, ledInit.bind(this, 1, 'R'));
 gpio.setup(gpioPins.led[1]['G'], gpio.DIR_OUT, ledInit.bind(this, 1, 'G'));
 gpio.setup(gpioPins.led[1]['B'], gpio.DIR_OUT, ledInit.bind(this, 1, 'B'));
