@@ -31,13 +31,20 @@ gpio.setup(gpioPins.led[1].G, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[1].B, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[2].R, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[2].G, gpio.DIR_OUT);
-gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT);
-// gpio.setup(16, gpio.DIR_IN, gpio.EDGE_BOTH);
-// gpio.setup(31, gpio.DIR_OUT);
-// gpio.setup(33, gpio.DIR_OUT);
-// gpio.setup(35, gpio.DIR_OUT);
+gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT, main);
 
-// setTimeout(SmartLocker.checkLockerOpen(1), 1000);
+function main() {
+    setBuzzer('on');
+    setTimeout, setBuzzer('off'), 1000);
+}
+
+function setBuzzer(value) {
+  var buzzer = {'on': false, 'off': true};
+  gpio.write(buzzer[value], value, function(err) {
+      if (err) throw err;
+      console.log('Written to pin');
+  });
+}
 
 app.get('/', function (req, res) {
   res.send('OK');
