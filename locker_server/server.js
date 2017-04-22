@@ -93,8 +93,19 @@ function getDoor(id, callback) {
   });
 }
 
+function checkClosedBuzzerOff(id) {
+  getDoor(id, function(err, value) {
+    if (value == 'open') {
+      setTimeout(checkClosedBuzzerOff.bind(this, id), 100);
+    }
+    else {
+      setBuzzer('off');
+    }
+  });
+}
+
 function lockIfOpen(id) {
-  setBuzzer('off');
+  // setBuzzer('off');
   getDoor(id, function(err, value) {
     if (value == 'open') {
       setBuzzer('on');
@@ -103,6 +114,7 @@ function lockIfOpen(id) {
       var ledRed = {1: 'on', 2: 'off'};
       setLED(id, 'G', ledGreen[id]);
       setLED(id, 'R', ledRed[id]);
+      setTimeout(checkClosedBuzzerOff.bind(this, id), 100);
     }
     else {
       setTimeout(lockIfOpen.bind(this, id), 100);
