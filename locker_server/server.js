@@ -95,18 +95,20 @@ app.get('/', function (req, res) {
 });
 
 app.get('/unlock', function (req, res) {
+  var led = {1: 'on', 2: 'off'};
   var lockerID = req.param('id');
   console.warn("Locker id: unlocked", lockerID);
   setLock(lockerID, 'unlock');
-  setLED(lockerID, 'G', 'on');
+  setLED(lockerID, 'R', led[lockerID]);
   res.send(lockerID);
 });
 
 app.get('/lock', function (req, res) {
+  var led = {1: 'off', 2: 'on'};
   var lockerID = req.param('id');
   console.warn("Locker id: locked", lockerID);
   setLock(lockerID, 'lock');
-  setLED(lockerID, 'R', 'on');
+  setLED(lockerID, 'R', led[lockerID]);
   res.send(lockerID);
 });
 
