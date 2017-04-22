@@ -99,7 +99,11 @@ function defaultState() {
   setLock(2, 'lock');
   setLED(1, 'R', ledRed[1]);
   setLED(2, 'R', ledRed[2]);
-  console.log("Default State Done");
+  lockers[1].lockStatus = 'locked';
+  lockers[2].lockStatus = 'locked';
+  lockers[1].doorStatus = getDoor(1);
+  lockers[2].doorStatus = getDoor(2);
+  console.log("Default State Done: "+lockers);
 }
 
 app.get('/', function (req, res) {
