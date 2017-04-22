@@ -19,7 +19,7 @@ let gpioPins = {
   'buzzer' : 38,
   'led' : {
     1: {'R': 31, 'G': 13, 'B': 19},
-    2: {'R': 11, 'G': 15, 'B': 13}
+    2: {'R': 11, 'G': 15, 'B': 32}
   }
 }
 
@@ -32,7 +32,7 @@ gpio.setup(gpioPins.led[1]['G'], gpio.DIR_OUT, ledInit.bind(this, 1, 'G'));
 gpio.setup(gpioPins.led[1]['B'], gpio.DIR_OUT, ledInit.bind(this, 1, 'B'));
 gpio.setup(gpioPins.led[2]['R'], gpio.DIR_OUT, ledInit.bind(this, 2, 'R'));
 gpio.setup(gpioPins.led[2]['G'], gpio.DIR_OUT, ledInit.bind(this, 2, 'G'));
-// gpio.setup(gpioPins.led[2]['B'], gpio.DIR_OUT, ledInit.bind(this, 2, 'B'));
+gpio.setup(gpioPins.led[2]['B'], gpio.DIR_OUT, ledInit.bind(this, 2, 'B'));
 
 function lockInit(id) {
   setLock(id, 'lock');
