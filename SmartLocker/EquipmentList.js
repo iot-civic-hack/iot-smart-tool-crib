@@ -80,7 +80,7 @@ export default class EquipmentList extends Component {
   });
 
   loadOscope = () => {
-    this.props.navigation.navigate('Oscope');
+    this.props.navigation.navigate('Oscope', {checkedOut: this.props.checkedOut});
   }
 
   loadSpectrum = () => {
