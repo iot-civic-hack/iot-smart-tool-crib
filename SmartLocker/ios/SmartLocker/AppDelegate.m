@@ -17,8 +17,27 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
-
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+  
+  // Loading JavaScript code
+#if DEBUG
+  // For Debug build load from development server. Start the server from the repository root:
+  //
+  // $ npm start
+#if TARGET_IPHONE_SIMULATOR
+  // Run from locally running dev server
+  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
+#else
+  // Run on device with code coming from dev server on PC (change the IP to your PCs IP)
+  jsCodeLocation = [NSURL URLWithString:@"http://172.16.104.214:8081/index.ios.bundle"];
+#endif
+#else
+  // For production load from pre-bundled file on disk. To re-generate the static bundle, run
+  //
+  // $ curl http://localhost:8081/index.ios.bundle -o main.jsbundle
+  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+#endif
+  
+//  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"SmartLocker"
