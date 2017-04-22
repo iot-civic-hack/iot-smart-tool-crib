@@ -23,50 +23,26 @@ let gpioPins = {
   }
 }
 
-gpio.setup(gpioPins.lock[1], gpio.DIR_OUT, lock1Init);
-gpio.setup(gpioPins.lock[2], gpio.DIR_OUT, lock2Init);
+gpio.setup(gpioPins.lock[1], gpio.DIR_OUT, lockInit.bind(this, 1));
+gpio.setup(gpioPins.lock[2], gpio.DIR_OUT, lockInit.bind(this, 2));
 gpio.setup(gpioPins.buzzer, gpio.DIR_OUT, buzzerInit);
-gpio.setup(gpioPins.led[1].R, gpio.DIR_OUT, led1RedInit);
-gpio.setup(gpioPins.led[1].G, gpio.DIR_OUT, led1GreenInit);
-gpio.setup(gpioPins.led[1].B, gpio.DIR_OUT, led1BlueInit);
-gpio.setup(gpioPins.led[2].R, gpio.DIR_OUT, led2RedInit);
-gpio.setup(gpioPins.led[2].G, gpio.DIR_OUT, led2GreenInit);
-gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT, led2BlueInit);
+gpio.setup(gpioPins.led[1].R, gpio.DIR_OUT, ledInit.bind(this, 1, 'R'));
+gpio.setup(gpioPins.led[1].G, gpio.DIR_OUT, ledInit.bind(this, 1, 'G'));
+gpio.setup(gpioPins.led[1].B, gpio.DIR_OUT, ledInit.bind(this, 1, 'B'));
+gpio.setup(gpioPins.led[2].R, gpio.DIR_OUT, ledInit.bind(this, 2, 'R'));
+gpio.setup(gpioPins.led[2].G, gpio.DIR_OUT, ledInit.bind(this, 2, 'G'));
+gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT, ledInit.bind(this, 2, 'B'));
 
-function lock1Init() {
-  setLock(1, 'lock');
-}
-
-function lock2Init() {
-  setLock(2, 'lock');
+function lockInit(id) {
+  setLock(id, 'lock');
 }
 
 function buzzerInit() {
   setBuzzer('off');
 }
 
-function led1RedInit() {
-  setLED(1, 'off');
-}
-
-function led1GreenInit() {
-  setLED(1, 'off');
-}
-
-function led1BlueInit() {
-  setLED(1, 'off');
-}
-
-function led2RedInit() {
-  setLED(2, 'off');
-}
-
-function led2GreenInit() {
-  setLED(2, 'off');
-}
-
-function led2BlueInit() {
-  setLED(2, 'off');
+function ledInit(id, color) {
+  setLED(id, color, 'off');
 }
 
 function setBuzzer(value) {
