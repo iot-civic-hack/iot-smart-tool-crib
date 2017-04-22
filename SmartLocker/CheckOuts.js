@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   DeviceEventEmitter,
   Image,
-  ScrollView
+  ScrollView,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 import BottomTab from './BottomTab';
@@ -39,13 +40,17 @@ export default class CheckOuts extends Component {
 
   renderTool = () => {
     if(this.state.done) {
-      return <Text style={{
-        margin: 20,
-        color: '#888',
-        fontSize: 18,
-        textAlign: 'center',
-        fontFamily: 'Avenir-Book',
-      }}>You have no equipment checked out</Text>
+      return (
+        <TouchableWithoutFeedback onPress={() => this.setState({done: false})}>
+          <Text style={{
+            margin: 20,
+            color: '#888',
+            fontSize: 18,
+            textAlign: 'center',
+            fontFamily: 'Avenir-Book',
+          }}>You have no equipment checked out</Text>
+        </TouchableWithoutFeedback>
+      )
     } else {
       return (
         <TouchableOpacity onPress={this.doCheckout}
