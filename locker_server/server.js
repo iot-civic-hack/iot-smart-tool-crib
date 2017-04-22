@@ -25,17 +25,17 @@ let gpioPins = {
 
 gpio.setup(gpioPins.lock[1], gpio.DIR_OUT);
 gpio.setup(gpioPins.lock[2], gpio.DIR_OUT);
-gpio.setup(gpioPins.buzzer, gpio.DIR_OUT);
+gpio.setup(gpioPins.buzzer, gpio.DIR_OUT, main);
 gpio.setup(gpioPins.led[1].R, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[1].G, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[1].B, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[2].R, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[2].G, gpio.DIR_OUT);
-gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT, main);
+gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT);
 
 function main() {
     setBuzzer('on');
-    setTimeout, setBuzzer('off'), 1000);
+    setTimeout(function() { setBuzzer('off'); }, 1000);
 }
 
 function setBuzzer(value) {
