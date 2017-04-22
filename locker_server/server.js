@@ -36,7 +36,7 @@ gpio.setup(gpioPins.led[2]['B'], gpio.DIR_OUT, ledInit.bind(this, 2, 'B'));
 
 //GPIO Inputs
 gpio.setup(gpioPins.sense[1], gpio.DIR_IN, senseInit.bind(this, 1));
-gpio.setup(gpioPins.sense[2], gpio.DIR_IN);
+gpio.setup(gpioPins.sense[2], gpio.DIR_IN, senseInit.bind(this, 2));
 
 function lockInit(id) {
   setLock(id, 'lock');
