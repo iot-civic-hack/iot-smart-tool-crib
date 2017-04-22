@@ -85,11 +85,24 @@ function setLED(id, color, value) {
   });
 }
 
-function getDoor(id) {
+function getDoor(id, callback) {
   var door = {true: 'open', false: 'closed'};
   gpio.read(gpioPins.sense[id], function(err, value) {
     console.log('The door is ' + door[value]);
-    return door[value];
+    callback(err, door[value]);
+  });
+}
+
+function lockIfOpen(id) {
+  setBuzzer('off');
+  getDoor(id, function(err, value) {
+    if (value == 'open') {
+      setLock(id, 'locked');
+    }
+    else {
+      setBuzzer('on');
+      setTimeout(lockIfOpen.bind(this, id), 100);
+    }
   });
 }
 
@@ -101,8 +114,8 @@ function defaultState() {
   setLED(2, 'R', ledRed[2]);
   lockers[1].lockStatus = 'locked';
   lockers[2].lockStatus = 'locked';
-  lockers[1].doorStatus = getDoor(1);
-  lockers[2].doorStatus = getDoor(2);
+  lockers[1].doorStatus = 'closed'
+  lockers[2].doorStatus = 'closed'
   console.log("Default State Done: "+JSON.stringify(lockers));
 }
 
@@ -113,11 +126,12 @@ app.get('/', function (req, res) {
 app.get('/unlock', function (req, res) {
   var ledGreen = {1: 'on', 2: 'off'};
   var ledRed = {1: 'off', 2: 'on'};
-  var lockerID = req.param('id');
-  console.warn("Locker id: unlocked", lockerID);
-  setLock(lockerID, 'unlock');
-  setLED(lockerID, 'G', ledGreen[lockerID]);
-  setLED(lockerID, 'R', ledRed[lockerID]);
+  var id = req.param('id');
+  console.warn("Locker id: unlocked", id);
+  setLock(id, 'unlock');
+  setLED(id, 'G', ledGreen[id]);
+  setLED(id, 'R', ledRed[id]);
+  setTimeout(lockIfOpen.bind(this, id), 5000);
   res.send(lockerID);
 });
 
