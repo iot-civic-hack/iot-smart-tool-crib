@@ -131,9 +131,6 @@ export default class Oscope extends Component {
             </Text>
 
           <View style={{
-            borderWidth: 1,
-            borderRadius: 4,
-            borderColor: '#cccccc',
             marginTop: 10,
             marginBottom: 20,
             paddingLeft: 30,

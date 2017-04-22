@@ -112,21 +112,22 @@ export default class SmartLockerView extends Component {
       <Image source={containerImage} style={{flex: 1, resizeMode: 'cover', alignItems: 'center', justifyContent: 'center'}}>
 
           <View style={{
-            backgroundColor: '#ffffff', 
+            // backgroundColor: '#ffffff', 
+            backgroundColor: 'transparent', 
             padding: 30,
             margin: 20,
             justifyContent: 'center',
             alignItems: 'center',
-            borderWidth: 1,
-            borderColor: '#cccccc',
-            borderRadius: 4,    
-            shadowColor: '#000000',
-            shadowOffset: {
-              width: 0,
-              height: 2
-            },
-            shadowRadius: 6,
-            shadowOpacity: 0.4
+            // borderWidth: 1,
+            // borderColor: '#cccccc',
+            // borderRadius: 4,    
+            // shadowColor: '#000000',
+            // shadowOffset: {
+            //   width: 0,
+            //   height: 2
+            // },
+            // shadowRadius: 6,
+            // shadowOpacity: 0.4
           }}>
           <Image source={smartlockimage} style={{height: 200, width: 200}} 
             resizeMode={Image.resizeMode.contain} />
