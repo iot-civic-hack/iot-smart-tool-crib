@@ -7,14 +7,26 @@ let lockers = {
 }
 
 let gpioPins = {
-  "lock" : {
+  'lock' : {
     1: 7,
     2: 29
+  },
+  'sense' : {
+    1: 16,
+    2: 18
+  },
+  'buzzer' : 38,
+  'led' : {
+    1: {'R': 31, 'G': 13, 'B': 19},
+    2: {'R': 17, 'G': 22, 'B': 27}
   }
 }
 
 SmartLocker.prototype.checkLockerOpen = function (id) {
-  console.log(gpioPins.lock[id]);
+  gpio.read(gpioPins.sense[id], function(err, value) {
+    console.log("Locker "+id+" is "+value);
+    return value;
+  }
 };
 
 module.exports = new SmartLocker();
