@@ -33,15 +33,15 @@ gpio.setup(gpioPins.led[2].R, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[2].G, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT);
 
-function lock1Init {
-  setLock('lock');
+function lock1Init() {
+  setLock(1, 'lock');
 }
 
-function lock2Init {
-  setLock('lock');
+function lock2Init() {
+  setLock(2, 'lock');
 }
 
-function buzzerInit {
+function buzzerInit() {
   setBuzzer('off');
 }
 
