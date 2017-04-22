@@ -152,7 +152,7 @@ app.get('/unlock', function (req, res) {
   setLED(id, 'R', ledRed[id]);
   setTimeout(lockIfOpen.bind(this, id), 5000);
   accessPerDay += 1;
-  SmartLockerM2X.updateDoorCount(accessPerDay);
+  SmartLockerM2X.updateDoorCount(id, accessPerDay);
   res.send(id);
 });
 
