@@ -51,7 +51,7 @@ function led1Init(id, color) {
 }
 
 function led2Init(id, color) {
-  setLED(id, color, 'off');
+  setLED(id, color, 'on');
 }
 
 function senseInit(id) {
