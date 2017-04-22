@@ -40,7 +40,7 @@ function main() {
 
 function setBuzzer(value) {
   var buzzer = {'on': false, 'off': true};
-  gpio.write(buzzer[value], value, function(err) {
+  gpio.write(gpioPins.buzzer, buzzer[value], function(err) {
       if (err) throw err;
       console.log('Written to pin');
   });
