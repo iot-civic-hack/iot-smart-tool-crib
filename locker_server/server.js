@@ -1,20 +1,42 @@
 var express = require('express');
-var app = express();
-// var gpio = require('rpi-gpio');
-var output = 0;
-
-// import { unlock, lock, getStatus } from './smart-locker';
-
 var gpio = require('rpi-gpio');
-var SmartLocker = require('./smart-locker.js');
+var app = express();
+
+let lockers = {
+  1: {status: 'closed'},
+  2: {status: 'closed'}
+}
+
+let gpioPins = {
+  'lock' : {
+    1: 7,
+    2: 29
+  },
+  'sense' : {
+    1: 16,
+    2: 18
+  },
+  'buzzer' : 38,
+  'led' : {
+    1: {'R': 31, 'G': 13, 'B': 19},
+    2: {'R': 17, 'G': 22, 'B': 27}
+  }
+}
+
+function checkLockerOpen(id) {
+  gpio.read(gpioPins.sense[id], function(err, value) {
+    console.log("Locker "+id+" is "+value);
+    return value;
+  });
+};
+
+checkLockerOpen(1);
 
 // gpio.setup(38, gpio.DIR_OUT, write);
 // gpio.setup(16, gpio.DIR_IN, gpio.EDGE_BOTH);
 // gpio.setup(31, gpio.DIR_OUT);
 // gpio.setup(33, gpio.DIR_OUT);
 // gpio.setup(35, gpio.DIR_OUT);
-
-SmartLocker.checkLockerOpen(2);
 
 app.get('/', function (req, res) {
   res.send('OK');
