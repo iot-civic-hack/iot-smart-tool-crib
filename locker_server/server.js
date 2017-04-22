@@ -25,13 +25,21 @@ let gpioPins = {
 
 gpio.setup(gpioPins.lock[1], gpio.DIR_OUT);
 gpio.setup(gpioPins.lock[2], gpio.DIR_OUT);
-gpio.setup(gpioPins.buzzer, gpio.DIR_OUT, main);
+gpio.setup(gpioPins.buzzer, gpio.DIR_OUT, gpioInitOut(gpioPins.buzzer, 'on'));
 gpio.setup(gpioPins.led[1].R, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[1].G, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[1].B, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[2].R, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[2].G, gpio.DIR_OUT);
 gpio.setup(gpioPins.led[2].B, gpio.DIR_OUT);
+
+function gpioInitOut(gpioPin) {
+  var value = {'on': false, 'off': true};
+  gpio.write(gpioPin, value, function(err) {
+      if (err) throw err;
+      console.log('Written to pin');
+  });
+}
 
 function main() {
     setBuzzer('on');
