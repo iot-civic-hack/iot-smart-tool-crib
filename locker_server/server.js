@@ -23,6 +23,7 @@ let gpioPins = {
   }
 }
 
+gpio.destroy();
 gpio.setup(gpioPins.lock[1], gpio.DIR_OUT, lockInit.bind(this, 1));
 gpio.setup(gpioPins.lock[2], gpio.DIR_OUT, lockInit.bind(this, 2));
 gpio.setup(gpioPins.buzzer, gpio.DIR_OUT, buzzerInit);
