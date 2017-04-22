@@ -132,18 +132,18 @@ app.get('/unlock', function (req, res) {
   setLED(id, 'G', ledGreen[id]);
   setLED(id, 'R', ledRed[id]);
   setTimeout(lockIfOpen.bind(this, id), 5000);
-  res.send(lockerID);
+  res.send(id);
 });
 
 app.get('/lock', function (req, res) {
   var ledGreen = {1: 'off', 2: 'on'};
   var ledRed = {1: 'on', 2: 'off'};
-  var lockerID = req.param('id');
-  console.warn("Locker id: locked", lockerID);
-  setLock(lockerID, 'lock');
-  setLED(lockerID, 'G', ledGreen[lockerID]);
-  setLED(lockerID, 'R', ledRed[lockerID]);
-  res.send(lockerID);
+  var id = req.param('id');
+  console.warn("Locker id: locked", id);
+  setLock(id, 'lock');
+  setLED(id, 'G', ledGreen[id]);
+  setLED(id, 'R', ledRed[id]);
+  res.send(id);
 });
 
 app.listen(3000, function () {
