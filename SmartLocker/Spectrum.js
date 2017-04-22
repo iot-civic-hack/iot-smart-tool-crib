@@ -70,7 +70,7 @@ export default class Spectrum extends Component {
             <Text style={{
               fontFamily: 'Avenir-Book',
               fontSize: 20,
-              color: '#888',
+              color: '#dd0000',
               marginTop: 20,
               marginBottom: 20
             }}>

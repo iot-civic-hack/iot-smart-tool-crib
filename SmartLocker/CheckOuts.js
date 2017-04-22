@@ -42,13 +42,15 @@ export default class CheckOuts extends Component {
     if(this.state.done) {
       return (
         <TouchableWithoutFeedback onPress={() => this.setState({done: false})}>
-          <Text style={{
-            margin: 20,
-            color: '#888',
-            fontSize: 18,
-            textAlign: 'center',
-            fontFamily: 'Avenir-Book',
-          }}>You have no equipment checked out</Text>
+          <View>
+            <Text style={{
+              margin: 20,
+              color: '#888',
+              fontSize: 18,
+              textAlign: 'center',
+              fontFamily: 'Avenir-Book',
+            }}>You have no equipment checked out</Text>
+          </View>
         </TouchableWithoutFeedback>
       )
     } else {
