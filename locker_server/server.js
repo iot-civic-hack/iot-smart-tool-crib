@@ -1,0 +1,28 @@
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('OK');
+});
+
+app.get('/unlock', function (req, res) {
+
+  var lockerID = req.param('id');
+
+
+
+  console.warn("locker id: ", lockerID);
+
+  //
+  // UNLOCK CODE HERE
+  // 
+
+
+
+
+  res.send('OK');
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000');
+});
