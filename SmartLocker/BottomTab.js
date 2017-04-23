@@ -10,10 +10,6 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
-// <Image source={this.props.icon} style={{height: 25}} resizeMode={Image.resizeMode.contain} />
-
-
 export default class BottomTab extends Component {
   render() {
     return (

@@ -10,11 +10,20 @@ import {
   Image
 } from 'react-native';
 
+import Beacons from 'react-native-beacons-manager';
+
 import BottomTab from './BottomTab';
 import oscope from './tools/oscope.png';
 
 import Return from './Return';
 import ThankYou from './ThankYou';
+
+
+const region = {
+  identifier: 'iBeacon Demo',
+  uuid: 'e2c56db5-dffb-48d2-b060-d0f5a71096ea'
+};
+
 
 export default class CheckingOut extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
@@ -29,6 +38,49 @@ export default class CheckingOut extends Component {
     close: false,
     unlocked: false,
     doorClosed: false
+  }
+
+  componentDidMount = () => {
+    if(Beacons && Beacons.requestWhenInUseAuthorization) {
+      this.readBeacons();
+    }
+  }
+
+
+  openLocker = (id) => {
+    // Make API Call here
+    // e.g.: fetch('http://172.16.104.104:3000/unlock?id=' + id);
+  }
+
+  readBeacons = () => {
+    // Request for authorization while the app is open
+    Beacons.requestWhenInUseAuthorization();
+
+    Beacons.startMonitoringForRegion(region);
+    Beacons.startRangingBeaconsInRegion(region);
+
+    Beacons.startUpdatingLocation();
+
+    // Listen for beacon changes
+    const subscription = DeviceEventEmitter.addListener(
+      'beaconsDidRange',
+      (data) => {
+        if(data && data.beacons && data.beacons.length > 0) {
+          const rssi = data.beacons.map(b => b.rssi).join(', ');
+          const proximity = data.beacons.map(b => b.proximity).join(', ');
+
+          if(rssi && rssi != 0 && rssi != '' && rssi > -60) {
+              this.setState({close: true});
+              Beacons.stopUpdatingLocation();
+          }
+        }
+      }
+    );
+  }
+
+  unlockDoor = () => {
+    this.openLocker(2);
+    this.setState({unlocked: true});
   }
 
   renderTextOrButton = () => {
@@ -46,7 +98,7 @@ export default class CheckingOut extends Component {
       )
     } else {
       return (
-        <TouchableOpacity onPress={() => {this.setState({unlocked: true})}} style={{
+        <TouchableOpacity onPress={this.unlockDoor} style={{
           padding: 10,
           paddingLeft: 20,
           paddingRight: 20,

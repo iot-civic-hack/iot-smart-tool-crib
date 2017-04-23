@@ -71,8 +71,6 @@ const Row = ({tool1, tool2}) => {
 export default class EquipmentList extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
     title: 'Equipment',
-    // headerTitle: <HeaderTitle label="TO DO" style={{marginLeft: (Platform.OS === 'ios' ? 0 : 40)}} />,
-    // headerStyle: { backgroundColor : '#ffffff', shadowRadius: 0, shadowOffset: { height: 0 }, elevation: 0 },
     tabBarIcon: ({ focused }) => {
       return <BottomTab icon={"wrench"} label="Equipment" focused={focused} />
     },

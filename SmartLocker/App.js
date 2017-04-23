@@ -19,8 +19,8 @@ import Oscope from './Oscope';
 import Spectrum from './Spectrum';
 import CheckingOut from './CheckingOut';
 
-console.disableYellowBox = true;
 
+console.disableYellowBox = true;
 
 
 const EquipmentStack = StackNavigator({
@@ -57,25 +57,14 @@ const MyTabs = TabNavigator({
   animationEnabled: false,
   backBehavior: 'none',
   showIcon: true,
-  // inactiveTintColor: backgroundColors.navActive,
-  // activeTintColor: backgroundColors.nav,
   tabBarOptions: {
     showLabel: false,
-    // showIcon: true,
     activeBackgroundColor: '#1144aa',
     inactiveBackgroundColor: '#0066cc',
     activeTintColor: '#1144aa',
     inactiveTintColor: '#0066cc',
-
-    // pressColor: Colors.redColor,
-    // indicatorStyle: { backgroundColor: Colors.redColor },
-    // style: {
-      // backgroundColor: Colors.whiteColor
-    // }
   }
 });
-
-
 
 
 
